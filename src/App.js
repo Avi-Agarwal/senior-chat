@@ -1,5 +1,6 @@
 import './App.css'
 import React from 'react'
+import Router from './Router';
 import { BrowserRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
@@ -11,8 +12,7 @@ function App() {
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<div className="App">
-					<h1>Hello World</h1>
-					<br/>
+					<Router/>
 				</div>
 			</ThemeProvider>
 		</BrowserRouter>
