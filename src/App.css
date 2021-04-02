@@ -41,14 +41,29 @@
 .appWrapper {
   height: 96vh;
   width: 94vw;
-  max-width: 1793px;
-  max-height: 1023px;
+  overflow-y: auto;
+  /*max-width: 1793px;*/
+  /*max-height: 1023px;*/
   border-radius: 40px;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+}
+
+.headerWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.bodyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 @keyframes App-logo-spin {

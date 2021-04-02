@@ -1,49 +1,53 @@
 import React from 'react';
+import '../App.css';
 import Box from '@material-ui/core/Box';
 import {Grid} from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-// import homeImage from '../assets/images/117297019_l.jpg'
+import homeImage from '../assets/images/117297019_l.jpg'
+import Introduction from '../components/Introducton';
 
 const useStyles  = makeStyles({
 	contentWrapper: {
-		paddingTop: 'max(2vh, 30px)',
+		width: '100%',
+		paddingTop: 'max(4vh, 30px)',
 		paddingLeft: 'max(4vw, 40px)',
-		paddingRight: '4%'
+		paddingRight: 'max(4vw, 40px)',
+		flexGrow: 1
 	},
 	homePhoto : {
-		margin: 'auto',
-		height: '5%',
+		marginTop: 0,
+		// width: '100%',
+		width: 'min(372px, 30vw)',
 		objectFit: 'contain'
-	},
-	lineBreak: {
-		height: '.2rem',
-		width: '94%',
-		borderWidth: 0,
-		color: '#6D50DE',
-		backgroundColor: '#6D50DE',
-		marginTop: '.15rem',
-		marginLeft: '0.5%'
 	}
 });
 
 const HomePage = () => {
 	const classes = useStyles();
-	const titleText = 'Senior Chat'
-	const homeSubtitle = 'A fun place for seniors and others to come together and talk!'
 
 	return (
 		<Box className={classes.contentWrapper}>
-			<Grid container spacing={3}>
-				<Grid item xs={12}  >
-					<Box style={{width: 'fit-content'}}>
-						<Typography variant='h1'>{titleText}</Typography>
-						<hr className={classes.lineBreak}/>
+			<Grid container spacing={6}>
+				{/*<Grid item  xs={9} style={{position: 'relative'}}>*/}
+				{/*	<Title/>*/}
+				{/*	<Box style={{paddingTop: '5vh'}}>*/}
+				{/*		<Title/>*/}
+				{/*	</Box>*/}
+				{/*</Grid>*/}
+				{/*<Grid item xs={3} style={{position: 'relative'}}>*/}
+				{/*	<img className={classes.homePhoto} src={homeImage}/>*/}
+				{/*</Grid>*/}
+				<Grid item xs={12}  style={{position: 'relative'}}>
+					<Box className={'headerWrapper'}>
+						<Introduction/>
+						<img className={classes.homePhoto} src={homeImage}/>
 					</Box>
-					<Typography variant='h2'>{homeSubtitle}</Typography>
 				</Grid>
-				<Grid item xs={6}>
-					{/*<img className={classes.homePhoto} src={homeImage}/>*/}
+				<Grid item xs={12}  style={{position: 'relative'}}>
+					<Box className={'bodyWrapper'}>
+						<Introduction/>
+						<img className={classes.homePhoto} src={homeImage}/>
+					</Box>
 				</Grid>
 			</Grid>
 		</Box>

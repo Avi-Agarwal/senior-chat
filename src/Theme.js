@@ -27,18 +27,31 @@ const theme = createMuiTheme({
 		fontFamily: 'Nunito',
 		h1: {
 			color: 'black',
-			fontSize: '2rem',
+			fontSize: '2.5rem',
 			fontWeight: 900,
 			textAlign: 'left'
-			// textDecoration: 'underline .2rem solid #6D50DE'
-			// borderBottom: '.2rem solid #6D50DE '
 		},
-		h2:  {
+		h2: {
+			color: 'black',
+			fontSize: '2.3rem',
+			fontWeight: 900,
+			textAlign: 'left'
+		},
+		subtitle1:  {
 			color: '#454545',
-			fontSize: '1rem',
+			fontSize: '1.3rem',
 			fontWeight: 750,
 			textAlign: 'left',
-			paddingTop: '.5rem'
+			paddingTop: '0rem',
+			paddingLeft: '0.1rem'
+		},
+		subtitle2:  {
+			color: '#868686',
+			fontSize: '1.3rem',
+			fontWeight: 750,
+			textAlign: 'left',
+			paddingTop: '0.2rem',
+			paddingLeft: '0.1rem'
 		}
 	}
 });
