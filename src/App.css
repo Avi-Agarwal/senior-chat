@@ -28,6 +28,29 @@
   color: #61dafb;
 }
 
+.backDrop {
+  height: 100vh;
+  width: 100vw;
+  background-color: #272727;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.appWrapper {
+  height: 96vh;
+  width: 94vw;
+  max-width: 1793px;
+  max-height: 1023px;
+  border-radius: 40px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

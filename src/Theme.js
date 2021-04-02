@@ -22,6 +22,24 @@ const theme = createMuiTheme({
 		},
 		contrastThreshold: 3,
 		tonalOffset: 0.2
+	},
+	typography: {
+		fontFamily: 'Nunito',
+		h1: {
+			color: 'black',
+			fontSize: '2rem',
+			fontWeight: 900,
+			textAlign: 'left'
+			// textDecoration: 'underline .2rem solid #6D50DE'
+			// borderBottom: '.2rem solid #6D50DE '
+		},
+		h2:  {
+			color: '#454545',
+			fontSize: '1rem',
+			fontWeight: 750,
+			textAlign: 'left',
+			paddingTop: '.5rem'
+		}
 	}
 });
 
