@@ -39,7 +39,7 @@ const Introduction = () => {
 				<hr className={classes.lineBreak}/>
 			</Box>
 			<Typography variant='subtitle1'>{homeSubtitle}</Typography>
-			<Box style={{width: 'fit-content', paddingTop: '4vh'}}>
+			<Box style={{width: 'fit-content', paddingTop: '4.5vh'}}>
 				<Typography variant='h2'>{voiceText}</Typography>
 			</Box>
 			<Typography variant='subtitle2'>{voiceSubtitle}</Typography>

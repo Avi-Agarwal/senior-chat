@@ -9,7 +9,7 @@ import Introduction from '../components/Introducton';
 const useStyles  = makeStyles({
 	contentWrapper: {
 		width: '100%',
-		paddingTop: 'max(4vh, 30px)',
+		paddingTop: 'max(4.5vh, 30px)',
 		paddingLeft: 'max(4vw, 40px)',
 		paddingRight: 'max(4vw, 40px)',
 		flexGrow: 1
@@ -17,7 +17,7 @@ const useStyles  = makeStyles({
 	homePhoto : {
 		marginTop: 0,
 		// width: '100%',
-		width: 'min(372px, 30vw)',
+		width: 'min(400px, 30vw)',
 		objectFit: 'contain'
 	}
 });

@@ -27,28 +27,28 @@ const theme = createMuiTheme({
 		fontFamily: 'Nunito',
 		h1: {
 			color: 'black',
-			fontSize: '2.5rem',
+			fontSize: '2.813rem',
 			fontWeight: 900,
 			textAlign: 'left'
 		},
 		h2: {
 			color: 'black',
-			fontSize: '2.3rem',
+			fontSize: '2.5rem',
 			fontWeight: 900,
 			textAlign: 'left'
 		},
 		subtitle1:  {
 			color: '#454545',
-			fontSize: '1.3rem',
-			fontWeight: 750,
+			fontSize: '1.563rem',
+			fontWeight: 700,
 			textAlign: 'left',
 			paddingTop: '0rem',
 			paddingLeft: '0.1rem'
 		},
 		subtitle2:  {
 			color: '#868686',
-			fontSize: '1.3rem',
-			fontWeight: 750,
+			fontSize: '1.563rem',
+			fontWeight: 700,
 			textAlign: 'left',
 			paddingTop: '0.2rem',
 			paddingLeft: '0.1rem'
