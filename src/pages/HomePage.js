@@ -5,6 +5,7 @@ import {Grid} from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import homeImage from '../assets/images/117297019_l.jpg'
 import Introduction from '../components/Introducton';
+import TableCard from '../components/TableCard';
 
 const useStyles  = makeStyles({
 	contentWrapper: {
@@ -43,13 +44,14 @@ const HomePage = () => {
 						<img className={classes.homePhoto} src={homeImage}/>
 					</Box>
 				</Grid>
-				<Grid item xs={12}  style={{position: 'relative'}}>
-					<Box className={'bodyWrapper'}>
-						<Introduction/>
-						<img className={classes.homePhoto} src={homeImage}/>
-					</Box>
-				</Grid>
 			</Grid>
+			<Box className={'voiceChatWrapper'}>
+				<TableCard tableCount={1}/>
+				<TableCard tableCount={2}/>
+				<TableCard tableCount={3}/>
+				<TableCard tableCount={4}/>
+				<TableCard tableCount={5}/>
+			</Box>
 		</Box>
 	);
 }

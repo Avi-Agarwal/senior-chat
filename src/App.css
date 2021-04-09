@@ -66,6 +66,17 @@
   justify-content: flex-start;
 }
 
+.voiceChatWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding-right: 1.5vw;
+  padding-left: 1.5vw;
+  /*justify-content: space-between;*/
+  padding-top: 5vh;
+  flex-wrap: wrap;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
