@@ -6,6 +6,7 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 import homeImage from '../assets/images/117297019_l.jpg'
 import Introduction from '../components/Introducton';
 import TableCard from '../components/TableCard';
+import StartTable from '../components/StartTable';
 
 const useStyles  = makeStyles({
 	contentWrapper: {
@@ -46,11 +47,11 @@ const HomePage = () => {
 				</Grid>
 			</Grid>
 			<Box className={'voiceChatWrapper'}>
+				<TableCard tableCount={0}/>
 				<TableCard tableCount={1}/>
 				<TableCard tableCount={2}/>
 				<TableCard tableCount={3}/>
-				<TableCard tableCount={4}/>
-				<TableCard tableCount={5}/>
+				<StartTable tableCount={4}/>
 			</Box>
 		</Box>
 	);

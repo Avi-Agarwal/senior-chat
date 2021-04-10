@@ -15,8 +15,8 @@ const theme = createMuiTheme({
 			main: '#ff4400'
 		},
 		secondary: {
-			light: '#0066ff',
-			main: '#0044ff',
+			light: '#FFFFFF',
+			main: '#FFFFFF',
 			// dark: will be calculated from palette.secondary.main,
 			contrastText: '#ffcc00'
 		},
@@ -37,6 +37,21 @@ const theme = createMuiTheme({
 			fontWeight: 900,
 			textAlign: 'left'
 		},
+		h3: {
+			color: 'black',
+			fontSize: '2.3rem',
+			fontWeight: 700,
+			textAlign: 'left',
+			paddingTop: '.45rem'
+		},
+		h4: {
+			color: '#AD99CE',
+			fontSize: '1.563rem',
+			fontWeight: 700,
+			textAlign: 'left',
+			paddingTop: '0.4rem',
+			paddingLeft: '0.1rem'
+		},
 		subtitle1:  {
 			color: '#454545',
 			fontSize: '1.563rem',
@@ -52,6 +67,20 @@ const theme = createMuiTheme({
 			textAlign: 'left',
 			paddingTop: '0.2rem',
 			paddingLeft: '0.1rem'
+		},
+		caption:  {
+			color: '#7E7E7E',
+			fontSize: '0.938rem',
+			fontWeight: 700,
+			textAlign: 'left',
+			paddingTop: '0.4rem',
+			paddingLeft: '0.1rem'
+		},
+		button: {
+			color: 'black',
+			fontSize: '1.875rem',
+			textTransform: 'capitalize',
+			fontWeight: 700
 		}
 	}
 });
