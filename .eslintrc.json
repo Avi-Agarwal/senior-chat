@@ -18,7 +18,7 @@
         "react"
     ],
     "rules": {
-        "comma-dangle": ["error", "never"],
+        "comma-dangle": [1, "never"],
         "indent": [
             "error",
             "tab"
@@ -31,6 +31,13 @@
             "warn",
             "single"
         ],
-        "semi": [0]
+        "semi": [0],
+        "react/prop-types": ["off"],
+        "padding-line-between-statements": [
+            "error",
+            { "blankLine": "always", "prev": "*", "next": "export" },
+            { "blankLine": "never", "prev": "*", "next": "import" }
+        ],
+        "object-curly-spacing": ["error", "always"]
     }
 }
