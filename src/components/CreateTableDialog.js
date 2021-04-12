@@ -22,7 +22,7 @@ import { Grid } from '@material-ui/core';
 // });
 
 
-export const CreateTableDialog  = ({ open = false, handleClose }) => {
+export const CreateTableDialog  = ({ open = false, handleClose, tableCreation }) => {
 	const [tableName, updateTableName] = React.useState('');
 	const [topics, updateTopics] = React.useState('');
 	// eslint-disable-next-line no-unused-vars
@@ -95,7 +95,13 @@ export const CreateTableDialog  = ({ open = false, handleClose }) => {
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<Button onClick={handleClose} color="primary">
+						<Button
+							onClick={() => {
+								tableCreation( tableName, maxPeople, topics );
+								handleClose();
+							}
+							}
+						>
 							Create
 						</Button>
 						<Button onClick={handleClose} color="primary">

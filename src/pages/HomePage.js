@@ -11,6 +11,7 @@ import '../assets/mockData/tableMockData'
 import { tableMockData } from '../assets/mockData/tableMockData';
 import TableCard from '../components/TableCard';
 import CreateTableDialog from '../components/CreateTableDialog';
+import { v4 as uuidv4 } from 'uuid';
 
 const useStyles  = makeStyles( {
 	contentWrapper: {
@@ -48,6 +49,18 @@ const HomePage = () => {
 		console.log('closed');
 	};
 
+	const tableCreation = (tableName, maxUsers, topics)  => {
+		const newTable = {
+			tableName: tableName,
+			maxUsers: maxUsers,
+			activeUsers: 1,
+			topics: topics,
+			uuid: uuidv4()
+		}
+		data.push(newTable);
+		updateData(data)
+	}
+
 	return (
 		<Box className={classes.contentWrapper}>
 			<Grid container spacing={6}>
@@ -75,7 +88,7 @@ const HomePage = () => {
 				}
 				<StartTable tableCount={data.length} handleClickOpen={handleClickOpen}/>
 			</Box>
-			<CreateTableDialog open={dialogState} handleClose={handleClose}/>
+			<CreateTableDialog open={dialogState} handleClose={handleClose} tableCreation={tableCreation}/>
 		</Box>
 	);
 }
