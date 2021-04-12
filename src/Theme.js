@@ -12,11 +12,10 @@ const theme = createMuiTheme( {
 	},
 	palette: {
 		primary: {
-			main: '#ff4400'
+			main: '#000000'
 		},
 		secondary: {
-			light: '#FFFFFF',
-			main: '#FFFFFF',
+			main: '#6D50DE',
 			// dark: will be calculated from palette.secondary.main,
 			contrastText: '#ffcc00'
 		},
@@ -80,7 +79,7 @@ const theme = createMuiTheme( {
 			textAlign: 'left',
 			paddingTop: '0.4rem',
 			paddingLeft: '0.14rem',
-			lineHeight: '1.3rem'
+			lineHeight: '1.4rem'
 		},
 		button: {
 			color: 'black',

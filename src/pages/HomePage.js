@@ -10,6 +10,7 @@ import StartTable from '../components/StartTable';
 import '../assets/mockData/tableMockData'
 import { tableMockData } from '../assets/mockData/tableMockData';
 import TableCard from '../components/TableCard';
+import CreateTableDialog from '../components/CreateTableDialog';
 
 const useStyles  = makeStyles( {
 	contentWrapper: {
@@ -35,6 +36,17 @@ const HomePage = () => {
 	const classes = useStyles();
 	// eslint-disable-next-line no-unused-vars
 	const [data, updateData] =  useState( getMockData );
+	const [dialogState, updateDialogState] = React.useState(false);
+
+	const handleClickOpen = () => {
+		updateDialogState(true);
+		console.log('opened');
+	};
+
+	const handleClose = () => {
+		updateDialogState(false);
+		console.log('closed');
+	};
 
 	return (
 		<Box className={classes.contentWrapper}>
@@ -61,8 +73,9 @@ const HomePage = () => {
 						<TableCard key={table.uuid} index={index} data={table}/>
 					) )
 				}
-				<StartTable tableCount={data.length}/>
+				<StartTable tableCount={data.length} handleClickOpen={handleClickOpen}/>
 			</Box>
+			<CreateTableDialog open={dialogState} handleClose={handleClose}/>
 		</Box>
 	);
 }

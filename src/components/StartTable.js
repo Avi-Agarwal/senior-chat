@@ -43,7 +43,7 @@ const cheekyStyle = ( cardColor ) => {
 
 const colorWheel = ['#E5DEF0', '#D6EDD9', '#F6F0D8', '#E6F2FE', '#F0DEDE', '#D6EDED']
 
-const StartTable = ( { tableCount } ) => {
+const StartTable = ( { tableCount, handleClickOpen } ) => {
 	const classes = useStyles();
 	const cardColor = colorWheel[tableCount%colorWheel.length];
 
@@ -53,7 +53,12 @@ const StartTable = ( { tableCount } ) => {
 				<Typography variant='h3'>Start A Table</Typography>
 				<Typography variant='h4'>:D</Typography>
 				<Typography variant='caption'>Create a new table to host a conversation!</Typography>
-				<Button className={classes.button}>Create</Button>
+				<Button
+					className={classes.button}
+					onClick={handleClickOpen}
+				>
+					Create
+				</Button>
 			</Box>
 		</Paper>
 	);
