@@ -78,13 +78,13 @@
 }
 
 .tableContentWrapper {
+  /*min-height: inherit;*/
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding-left: 1vw;
-  flex: 1
+  padding-left: 0vw;
 }
 
 @keyframes App-logo-spin {

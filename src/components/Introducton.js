@@ -3,7 +3,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
-const useStyles  = makeStyles({
+const useStyles  = makeStyles( {
 	contentWrapper: {
 		display: 'flex',
 		flexDirection: 'column',
@@ -20,10 +20,11 @@ const useStyles  = makeStyles({
 		borderWidth: 0,
 		color: '#6D50DE',
 		backgroundColor: '#6D50DE',
-		marginTop: '.1rem',
+		// marginTop: '.1rem',
+		marginTop: '.15vh',
 		marginLeft: '0.5%'
 	}
-});
+} );
 
 const Introduction = () => {
 	const classes = useStyles();
@@ -34,12 +35,12 @@ const Introduction = () => {
 
 	return(
 		<Box>
-			<Box style={{width: 'fit-content'}}>
+			<Box style={{ width: 'fit-content' }}>
 				<Typography variant='h1'>{titleText}</Typography>
 				<hr className={classes.lineBreak}/>
 			</Box>
 			<Typography variant='subtitle1'>{homeSubtitle}</Typography>
-			<Box style={{width: 'fit-content', paddingTop: '4.5vh'}}>
+			<Box style={{ width: 'fit-content', paddingTop: '4.5vh' }}>
 				<Typography variant='h2'>{voiceText}</Typography>
 			</Box>
 			<Typography variant='subtitle2'>{voiceSubtitle}</Typography>

@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+const theme = createMuiTheme( {
 	breakpoints: {
 		values: {
 			xs: 0,
@@ -28,6 +28,10 @@ const theme = createMuiTheme({
 		h1: {
 			color: 'black',
 			fontSize: '2.813rem',
+			// Use this for mobile
+			// '@media (max-width:600px)': {
+			// 	fontSize: '1.5rem',
+			// },
 			fontWeight: 900,
 			textAlign: 'left'
 		},
@@ -42,7 +46,7 @@ const theme = createMuiTheme({
 			fontSize: '2.3rem',
 			fontWeight: 700,
 			textAlign: 'left',
-			paddingTop: '.45rem'
+			paddingTop: '0rem'
 		},
 		h4: {
 			color: '#AD99CE',
@@ -50,7 +54,8 @@ const theme = createMuiTheme({
 			fontWeight: 700,
 			textAlign: 'left',
 			paddingTop: '0.4rem',
-			paddingLeft: '0.1rem'
+			paddingLeft: '0.1rem',
+			paddingBottom: '.3vh'
 		},
 		subtitle1:  {
 			color: '#454545',
@@ -74,7 +79,8 @@ const theme = createMuiTheme({
 			fontWeight: 700,
 			textAlign: 'left',
 			paddingTop: '0.4rem',
-			paddingLeft: '0.1rem'
+			paddingLeft: '0.14rem',
+			lineHeight: '1.3rem'
 		},
 		button: {
 			color: 'black',
@@ -83,6 +89,6 @@ const theme = createMuiTheme({
 			fontWeight: 700
 		}
 	}
-});
+} );
 
 export default theme
