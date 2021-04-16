@@ -4,25 +4,48 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 // import DialogActions from '@material-ui/core/DialogActions';
 // import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
-// import makeStyles from '@material-ui/core/styles/makeStyles';
+import Box from '@material-ui/core/Box';
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 
-// const useStyles  = makeStyles( {
-// 	contentWrapper: {
-// 		display: 'flex',
-// 		flexDirection: 'column',
-// 		justifyContent: 'flex-start',
-// 		alignItems: 'flex-start'
-// 	},
-// });
+const useStyles = makeStyles( {
+	dialogStyle: {
+		borderRadius: '80px',
+		backgroundColor: '#6D50DE'
+	},
+	lineBreak: {
+		height: '.125rem',
+		width: '94%',
+		borderWidth: 0,
+		color: '#6D50DE',
+		backgroundColor: '#6D50DE',
+		// marginTop: '.1rem',
+		marginTop: '.15vh',
+		marginLeft: '2%'
+	},
+	button : {
+		backgroundColor: 'white',
+		width: '150px',
+		height: '44px',
+		borderRadius: '30px',
+		marginTop: 'auto'
+		// marginBottom: '24px'
+	}
+} )
 
+const dialogStyle = {
+	borderRadius: '20px',
+	border: '2px solid black',
+	width: '80vw',
+	maxWidth: '650px'
+}
 
 export const CreateTableDialog  = ({ open = false, handleClose, tableCreation }) => {
+	const classes = useStyles();
 	const [tableName, updateTableName] = React.useState('');
 	const [topics, updateTopics] = React.useState('');
 	// eslint-disable-next-line no-unused-vars
@@ -38,16 +61,13 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 
 	return (
 		<>
-			<Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-				<Grid container direction="column" justify="flex-start" alignItems="flex-start" style={{ paddingLeft: '1vw' }}>
+			<Dialog open={open} onClose={handleClose} PaperProps={{ style: dialogStyle }}>
+				<Grid container direction="column" justify="flex-start" alignItems="flex-start" style={{ marginLeft: '6%', width: '94%' }}>
 					<Grid item xs={12}>
-						<DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-					</Grid>
-					<Grid item xs={12}>
-						<DialogContentText>
-							To subscribe to this website, please enter your email address here. We will send updates
-							occasionally.
-						</DialogContentText>
+						<Box style={{ width: 'fit-content', marginTop: '29px' }}>
+							<Typography variant='h3'>Table Creation</Typography>
+							<hr className={classes.lineBreak}/>
+						</Box>
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
@@ -55,14 +75,15 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							id="tableName"
 							label="Table Name"
 							type="text"
-							helperText={'Table Name (13 character max)'}
+							helperText={'Table Name (11 character max)'}
 							margin='normal'
 							onChange={({ target }) => {
-								target.value.length < 14 ?  updateTableName(target.value): null ;
+								target.value.length < 12 ?  updateTableName(target.value): null ;
 							}}
 							value={tableName}
-							color="secondary"
+							color="primary"
 							required
+							style={{ marginBottom: '50px' }}
 						/>
 					</Grid>
 					<Grid item xs={12}>
@@ -81,7 +102,7 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							required
 						/>
 					</Grid>
-					<Grid item xs={12}>
+					<Grid item xs={9}>
 						<Typography variant='subtitle1'>Max People on the Table</Typography>
 						<Slider
 							defaultValue={1}
@@ -92,21 +113,24 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							onChange={handleSliderChange}
 							min={1}
 							max={6}
+							style={{ marginLeft: '.5vw' }}
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<Button
-							onClick={() => {
-								tableCreation( tableName, maxPeople, topics );
-								handleClose();
-							}
-							}
-						>
-							Create
-						</Button>
-						<Button onClick={handleClose} color="primary">
-							Cancel
-						</Button>
+						<Box style={{ marginBottom: '18px' }}>
+							<Button
+								onClick={() => {
+									tableCreation( tableName, maxPeople, topics );
+									handleClose();
+								}
+								}
+							>
+								Create
+							</Button>
+							<Button onClick={handleClose} color="primary">
+								Cancel
+							</Button>
+						</Box>
 					</Grid>
 					{/*<DialogContent>*/}
 					{/*	<DialogContentText>*/}
