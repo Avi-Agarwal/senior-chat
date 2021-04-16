@@ -71,7 +71,6 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
-							autoFocus
 							id="tableName"
 							label="Table Name"
 							type="text"
@@ -83,12 +82,11 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							value={tableName}
 							color="primary"
 							required
-							style={{ marginBottom: '50px' }}
+							style={{ marginBottom: '0px' }}
 						/>
 					</Grid>
 					<Grid item xs={12}>
 						<TextField
-							autoFocus
 							id="topics"
 							label="Topics"
 							type="text"
