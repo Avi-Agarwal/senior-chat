@@ -28,6 +28,65 @@
   color: #61dafb;
 }
 
+.backDrop {
+  height: 100vh;
+  width: 100vw;
+  background-color: #272727;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.appWrapper {
+  height: 95vh;
+  width: 95vw;
+  overflow-y: auto;
+  /*max-width: 1793px;*/
+  /*max-height: 1023px;*/
+  border-radius: 40px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.headerWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.bodyWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.voiceChatWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding-right: 1.5vw;
+  padding-left: 1.5vw;
+  /*justify-content: space-between;*/
+  padding-top: 5vh;
+  flex-wrap: wrap;
+}
+
+.tableContentWrapper {
+  /*min-height: inherit;*/
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding-left: 0vw;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
