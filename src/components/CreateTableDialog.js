@@ -2,14 +2,13 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogTitle from '@material-ui/core/DialogTitle';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Slider from '@material-ui/core/Slider';
 import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import makeStyles from '@material-ui/core/styles/makeStyles';
+import { Blip } from './Blips';
 
 
 const useStyles = makeStyles( {
@@ -27,71 +26,137 @@ const useStyles = makeStyles( {
 		marginTop: '.15vh',
 		marginLeft: '2%'
 	},
-	button : {
-		backgroundColor: 'white',
+	createButton : {
+		backgroundColor: '#6D50DE',
 		width: '150px',
 		height: '44px',
 		borderRadius: '30px',
-		marginTop: 'auto'
+		marginTop: 'auto',
+		marginRight: '45px',
+		fontWeight: 600,
+		'&:hover': {
+			backgroundColor: '#6D50DE'
+		}
 		// marginBottom: '24px'
+	},
+	textField : {
+		maxWidth: '341px',
+		width: '50%',
+		marginTop: '8px',
+		marginBottom: '0px'
+	},
+	sliderStyle : {
+		maxWidth: '341px',
+		width: '50%',
+		marginLeft: '.3vw'
+	},
+	input: {
+		fontFamily: 'Nunito',
+		fontSize: '1.25',
+		fontWeight: 600
 	}
-} )
+});
+
+// Create button text styling
+const theme = createMuiTheme({
+	overrides: {
+		MuiButton: {
+			text: {
+				color: 'white',
+				fontSize: '1.875rem',
+				textTransform: 'capitalize',
+				fontWeight: 700
+			}
+		}
+	}
+});
 
 const dialogStyle = {
 	borderRadius: '20px',
 	border: '2px solid black',
 	width: '80vw',
-	maxWidth: '650px'
+	maxWidth: '650px',
+	marginBottom: '20vh'
+	// height: '541px'
 }
 
 export const CreateTableDialog  = ({ open = false, handleClose, tableCreation }) => {
 	const classes = useStyles();
 	const [tableName, updateTableName] = React.useState('');
 	const [topics, updateTopics] = React.useState('');
-	// eslint-disable-next-line no-unused-vars
 	const [maxPeople, updateMaxPeople] = React.useState(1);
+	const [blipInfo, updateBlipInfo] = React.useState({ 
+		blipNeeded: false, message: 'default', type: 'success' 
+	})
 
 	const handleSliderChange = (event, newValue) => {
 		updateMaxPeople(newValue);
 	};
 
+	const dialogClose = () => {
+		handleClose();
+		updateTableName('');
+		updateTopics('');
+		updateMaxPeople(1);
+		updateBlipInfo({ blipNeeded: false })
+	}
+
 	const valuetext = (value) => {
 		return `${value} Max People`;
 	}
 
+	const handleCreate = () => {
+		console.log(tableName.length);
+		console.log(topics.length);
+		if (tableName.length < 1 || topics.length < 1) {
+			updateBlipInfo({
+				blipNeeded: true, message: 'Please make sure all fields are filled out', type: 'error'
+			})
+			// return (<Blips type={'warning'} message={'Please make sure all fields are filled out'}/>);
+		}
+		else {
+			tableCreation( tableName, maxPeople, topics );
+			dialogClose();
+		}
+	}
+
 	return (
 		<>
-			<Dialog open={open} onClose={handleClose} PaperProps={{ style: dialogStyle }}>
-				<Grid container direction="column" justify="flex-start" alignItems="flex-start" style={{ marginLeft: '6%', width: '94%' }}>
+			<Dialog open={open} onClose={dialogClose} PaperProps={{ style: dialogStyle }}>
+				<Grid container spacing={0} direction="column" justify="flex-start" alignItems="flex-start" style={{ marginLeft: '6%', width: '94%' }}>
 					<Grid item xs={12}>
 						<Box style={{ width: 'fit-content', marginTop: '29px' }}>
 							<Typography variant='h3'>Table Creation</Typography>
 							<hr className={classes.lineBreak}/>
 						</Box>
 					</Grid>
-					<Grid item xs={12}>
+					<Grid item xs={12} style={{ width: '100%', marginTop: '25px' }}>
+						<Typography variant='h5'>Name</Typography>
 						<TextField
 							id="tableName"
-							label="Table Name"
 							type="text"
-							helperText={'Table Name (11 character max)'}
+							placeholder={'Table Name (13 character max)'}
+							InputProps={{ className: classes.input }}
+							className={classes.textField}
 							margin='normal'
 							onChange={({ target }) => {
-								target.value.length < 12 ?  updateTableName(target.value): null ;
+								target.value.length < 14 ?  updateTableName(target.value): null ;
 							}}
 							value={tableName}
-							color="primary"
+							color="secondary"
 							required
 							style={{ marginBottom: '0px' }}
 						/>
 					</Grid>
-					<Grid item xs={12}>
+					<Grid item xs={12} style={{ width: '100%', marginTop: '27.5px' }}>
+						<Typography variant='h5'>Topics</Typography>
 						<TextField
 							id="topics"
-							label="Topics"
 							type="text"
-							helperText={'What topics would you like to discuss'}
+							placeholder={'What topics would you like to discuss'}
+							InputProps={{ className: classes.input }}
 							margin='normal'
+							className={classes.textField}
 							onChange={({ target }) => {
 								updateTopics(target.value);
 							}}
@@ -100,8 +165,8 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							required
 						/>
 					</Grid>
-					<Grid item xs={9}>
-						<Typography variant='subtitle1'>Max People on the Table</Typography>
+					<Grid item xs={12} style={{ marginTop: '33px', width: '100%' }}>
+						<Typography variant='subtitle1'>Max Participants</Typography>
 						<Slider
 							defaultValue={1}
 							getAriaValueText={valuetext}
@@ -111,78 +176,34 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							onChange={handleSliderChange}
 							min={1}
 							max={6}
-							style={{ marginLeft: '.5vw' }}
+							color={'secondary'}
+							className={classes.sliderStyle}
 						/>
 					</Grid>
 					<Grid item xs={12}>
-						<Box style={{ marginBottom: '18px' }}>
-							<Button
-								onClick={() => {
-									tableCreation( tableName, maxPeople, topics );
-									handleClose();
-								}
-								}
-							>
-								Create
-							</Button>
-							<Button onClick={handleClose} color="primary">
+						<Box style={{ paddingBottom: '25px', paddingTop: '25px' }}>
+							<ThemeProvider theme={theme}>
+								<Button
+									className={classes.createButton}
+									onClick={handleCreate}
+								>
+									Create
+								</Button>
+							</ThemeProvider>
+							<Button onClick={dialogClose} color="primary">
 								Cancel
 							</Button>
 						</Box>
 					</Grid>
-					{/*<DialogContent>*/}
-					{/*	<DialogContentText>*/}
-					{/*		To subscribe to this website, please enter your email address here. We will send updates*/}
-					{/*		occasionally.*/}
-					{/*	</DialogContentText>*/}
-					{/*	<TextField*/}
-					{/*		autoFocus*/}
-					{/*		id="tableName"*/}
-					{/*		label="Table Name"*/}
-					{/*		type="text"*/}
-					{/*		helperText={'13 Character Table Name'}*/}
-					{/*		margin='normal'*/}
-					{/*		onChange={({ target }) => {*/}
-					{/*			updateTableName(target.value);*/}
-					{/*		}}*/}
-					{/*		value={tableName}*/}
-					{/*		color="secondary"*/}
-					{/*		required*/}
-					{/*	/>*/}
-					{/*	<TextField*/}
-					{/*		autoFocus*/}
-					{/*		id="topics"*/}
-					{/*		label="Topics"*/}
-					{/*		type="text"*/}
-					{/*		helperText={'What topics would you like to discuss'}*/}
-					{/*		margin='normal'*/}
-					{/*		onChange={({ target }) => {*/}
-					{/*			updateTopics(target.value);*/}
-					{/*		}}*/}
-					{/*		value={topics}*/}
-					{/*		color="secondary"*/}
-					{/*		required*/}
-					{/*	/>*/}
-					{/*	<Typography variant='subtitle1'>Max People on the Table</Typography>*/}
-					{/*	<Slider*/}
-					{/*		defaultValue={1}*/}
-					{/*		getAriaValueText={valuetext}*/}
-					{/*		valueLabelDisplay="auto"*/}
-					{/*		step={1}*/}
-					{/*		marks*/}
-					{/*		onChange={handleSliderChange}*/}
-					{/*		min={1}*/}
-					{/*		max={6}*/}
-					{/*	/>*/}
-					{/*</DialogContent>*/}
-					{/*<DialogActions>*/}
-					{/*	<Button onClick={handleClose} color="primary">*/}
-					{/*		Cancel*/}
-					{/*	</Button>*/}
-					{/*	<Button onClick={handleClose} color="primary">*/}
-					{/*		Create*/}
-					{/*	</Button>*/}
-					{/*</DialogActions>*/}
+					{
+						blipInfo.blipNeeded ? 
+							<Blip 
+								message={blipInfo.message} 
+								type={blipInfo.type} 
+								externalClose={() => { updateBlipInfo({ blipNeeded: false }) } }
+							/> 
+							: null
+					}
 				</Grid>
 			</Dialog>
 		</>

@@ -56,6 +56,13 @@ const theme = createMuiTheme( {
 			paddingLeft: '0.1rem',
 			paddingBottom: '.3vh'
 		},
+		h5: {
+			color: '#000000',
+			fontSize: '1.563rem',
+			fontWeight: 700,
+			textAlign: 'left',
+			paddingLeft: '0.1rem'
+		},
 		subtitle1:  {
 			color: '#454545',
 			fontSize: '1.563rem',

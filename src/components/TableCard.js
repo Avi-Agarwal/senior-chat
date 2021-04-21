@@ -27,7 +27,10 @@ const useStyles = makeStyles( {
 		width: '150px',
 		height: '44px',
 		borderRadius: '30px',
-		marginTop: 'auto'
+		marginTop: 'auto',
+		'&:hover': {
+			backgroundColor: '#FFFFFF'
+		}
 		// marginBottom: '24px'
 	}
 } )
