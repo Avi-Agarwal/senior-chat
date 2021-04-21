@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import { Blip } from './Blips';
+import { Blip } from './Blip';
 
 
 const useStyles = makeStyles( {
