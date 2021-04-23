@@ -112,7 +112,6 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 			updateBlipInfo({
 				blipNeeded: true, message: 'Please make sure all fields are filled out', type: 'error'
 			})
-			// return (<Blips type={'warning'} message={'Please make sure all fields are filled out'}/>);
 		}
 		else {
 			tableCreation( tableName, maxPeople, topics );
@@ -135,12 +134,12 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 						<TextField
 							id="tableName"
 							type="text"
-							placeholder={'Table Name (13 character max)'}
+							placeholder={'Table Name (15 character max)'}
 							InputProps={{ className: classes.input }}
 							className={classes.textField}
 							margin='normal'
 							onChange={({ target }) => {
-								target.value.length < 14 ?  updateTableName(target.value): null ;
+								target.value.length < 16 ?  updateTableName(target.value): null ;
 							}}
 							value={tableName}
 							color="secondary"
@@ -158,7 +157,7 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							margin='normal'
 							className={classes.textField}
 							onChange={({ target }) => {
-								updateTopics(target.value);
+								target.value.length < 41 ? updateTopics(target.value) : null ;
 							}}
 							value={topics}
 							color="secondary"
