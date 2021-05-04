@@ -35,14 +35,13 @@ const useStyles = makeStyles( {
 		// marginBottom: '24px'
 	},
 	titleStyle : {
-		width: '100%',
+		width: '105%',
 		textOverflow: 'ellipsis',
 		whiteSpace: 'nowrap',
 		overflow: 'hidden'
 	},
 	topicStyle : {
 		width: '100%',
-		textOverflow: 'ellipsis',
 		overflowWrap: 'breakWord',
 		wordWrap: 'break-word'
 	}
@@ -69,7 +68,7 @@ const TableCard = ( { index, data } ) => {
 	return (
 		<Paper elevation={0}  style={cheekyStyle( cardColor )} className={classes.cardStyle}>
 			<Box className={'tableContentWrapper'}>
-				<Tooltip title={tableTitle} placement="bottom-end">
+				<Tooltip title={tableTitle} arrow placement="bottom-end">
 					<Typography variant='h3' className={classes.titleStyle}>{tableTitle}</Typography>
 				</Tooltip>
 				<Typography variant='h4'>Talking: {toTitleCase(data.activeUsers)}/{toTitleCase(data.maxUsers)}</Typography>

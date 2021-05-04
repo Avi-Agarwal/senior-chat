@@ -106,8 +106,6 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 	}
 
 	const handleCreate = () => {
-		console.log(tableName.length);
-		console.log(topics.length);
 		if (tableName.length < 1 || topics.length < 1) {
 			updateBlipInfo({
 				blipNeeded: true, message: 'Please make sure all fields are filled out', type: 'error'
@@ -157,7 +155,7 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							margin='normal'
 							className={classes.textField}
 							onChange={({ target }) => {
-								target.value.length < 41 ? updateTopics(target.value) : null ;
+								target.value.length < 50 ? updateTopics(target.value) : null ;
 							}}
 							value={topics}
 							color="secondary"

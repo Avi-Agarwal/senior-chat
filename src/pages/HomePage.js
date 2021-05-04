@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../App.css';
 import Box from '@material-ui/core/Box';
 import { Grid } from '@material-ui/core';
@@ -12,6 +12,7 @@ import { tableMockData } from '../assets/mockData/tableMockData';
 import TableCard from '../components/TableCard';
 import CreateTableDialog from '../components/CreateTableDialog';
 import { v4 as uuidv4 } from 'uuid';
+import firebase from '../utils/firebase.secrets';
 
 const useStyles  = makeStyles( {
 	contentWrapper: {
@@ -35,9 +36,61 @@ const getMockData = () =>  {
 
 const HomePage = () => {
 	const classes = useStyles();
+	// const firebaseRef = firebase.database().ref().child('tables');
+	const firestoreDB = firebase.firestore();
 	// eslint-disable-next-line no-unused-vars
-	const [data, updateData] =  useState( getMockData );
+	const [data, updateData] = React.useState(getMockData());
 	const [dialogState, updateDialogState] = React.useState(false);
+
+	React.useEffect(async () => {
+		const tablesRef = firestoreDB.collection('tables');
+
+		// Realtime Updates
+		tablesRef.orderBy('creationTime').onSnapshot((snapshot) => {
+			let tempData = [];
+			tempData = tempData.concat(getMockData())
+			snapshot.forEach((table) => {
+				console.log(table.id);
+				console.log(table.data()); // returns an object
+				tempData.push(table.data())
+			});
+			console.log(data);
+			console.log(tempData);
+			updateData(tempData);
+		});
+
+		// Get Data Once
+		// tablesRef.get().then((snapshot) => {
+		// 	let tempData = [];
+		// 	tempData = tempData.concat(getMockData())
+		// 	snapshot.forEach((table) => {
+		// 		console.log(table.id);
+		// 		console.log(table.data()); // returns an object
+		// 		tempData.push(table.data())
+		// 	});
+		// 	console.log(data);
+		// 	console.log(tempData);
+		// 	updateData(tempData);
+		// });
+
+		// Real time DB
+		// firebaseRef.on('value', (snapshot) => {
+		// 	// updateData([]);
+		// 	let tempData = [];
+		// 	tempData = tempData.concat(getMockData())
+		// 	const tableData = snapshot.val();
+		// 	console.log(tableData);
+		// 	for (const tableID in tableData) {
+		// 		console.log(tableData[tableID]);
+		// 		tempData.push(tableData[tableID]);
+		// 	}
+		//
+		// 	console.log(data);
+		// 	console.log(tempData);
+		// 	// updateData([]);
+		// 	updateData(tempData);
+		// })
+	},[])
 
 	const handleClickOpen = () => {
 		updateDialogState(true);
@@ -55,24 +108,21 @@ const HomePage = () => {
 			maxUsers: maxUsers,
 			activeUsers: 1,
 			topics: topics,
-			uuid: uuidv4()
+			uuid: uuidv4(),
+			creationTime: firebase.firestore.FieldValue.serverTimestamp()
 		}
 		data.push(newTable);
-		updateData(data)
+		updateData(data);
+
+		//Firebase
+		// firebase.database().ref( 'tables/' + newTable.uuid.toString() ).set( newTable );
+		// const db = firebase.firestore();
+		firestoreDB.collection('tables').doc(newTable.uuid).set( newTable );
 	}
 
 	return (
 		<Box className={classes.contentWrapper}>
 			<Grid container spacing={6}>
-				{/*<Grid item  xs={9} style={{position: 'relative'}}>*/}
-				{/*	<Title/>*/}
-				{/*	<Box style={{paddingTop: '5vh'}}>*/}
-				{/*		<Title/>*/}
-				{/*	</Box>*/}
-				{/*</Grid>*/}
-				{/*<Grid item xs={3} style={{position: 'relative'}}>*/}
-				{/*	<img className={classes.homePhoto} src={homeImage}/>*/}
-				{/*</Grid>*/}
 				<Grid item xs={12}  style={{ position: 'relative' }}>
 					<Box className={'headerWrapper'}>
 						<Introduction/>

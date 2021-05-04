@@ -36,4 +36,4 @@ export const tableMockData = [
 		topics: 'Meaning of Life',
 		uuid: uuidv4()
 	}
-]
+];
