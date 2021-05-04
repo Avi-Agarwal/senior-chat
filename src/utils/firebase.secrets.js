@@ -9,7 +9,7 @@ const firebaseConfig = {
 	appId: '1:117870800885:web:58f7bd029ce43b9c71babc',
 	measurementId: 'G-X3WF2J440T'
 };
-// Initialize Firebase
+// Initialize Firebase secret check
 firebase.initializeApp(firebaseConfig);
 
 export default firebase;
