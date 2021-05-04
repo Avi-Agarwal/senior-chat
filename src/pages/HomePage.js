@@ -12,7 +12,7 @@ import { tableMockData } from '../assets/mockData/tableMockData';
 import TableCard from '../components/TableCard';
 import CreateTableDialog from '../components/CreateTableDialog';
 import { v4 as uuidv4 } from 'uuid';
-import firebase from '../utils/firebase.secrets';
+import firebase from '../database/database.secrets';
 
 const useStyles  = makeStyles( {
 	contentWrapper: {
