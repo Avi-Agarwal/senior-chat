@@ -13,6 +13,7 @@ import TableCard from '../components/TableCard';
 import CreateTableDialog from '../components/CreateTableDialog';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from '../database/database.secrets';
+import { getUser, updateUser } from '../utils/user';
 
 const useStyles  = makeStyles( {
 	contentWrapper: {
@@ -42,20 +43,20 @@ const HomePage = () => {
 	const [data, updateData] = React.useState(getMockData());
 	const [dialogState, updateDialogState] = React.useState(false);
 
+	// Initialize User
+	let currUser = getUser();
+
 	React.useEffect(async () => {
 		const tablesRef = firestoreDB.collection('tables');
 
 		// Realtime Updates
 		tablesRef.orderBy('creationTime').onSnapshot((snapshot) => {
 			let tempData = [];
-			tempData = tempData.concat(getMockData())
+			// tempData = tempData.concat(getMockData())
 			snapshot.forEach((table) => {
-				console.log(table.id);
-				console.log(table.data()); // returns an object
 				tempData.push(table.data())
 			});
-			console.log(data);
-			console.log(tempData);
+			// console.log(tempData);
 			updateData(tempData);
 		});
 
@@ -94,12 +95,12 @@ const HomePage = () => {
 
 	const handleClickOpen = () => {
 		updateDialogState(true);
-		console.log('opened');
+		// console.log('opened');
 	};
 
 	const handleClose = () => {
 		updateDialogState(false);
-		console.log('closed');
+		// console.log('closed');
 	};
 
 	const tableCreation = (tableName, maxUsers, topics)  => {
@@ -109,8 +110,14 @@ const HomePage = () => {
 			activeUsers: 1,
 			topics: topics,
 			uuid: uuidv4(),
-			creationTime: firebase.firestore.FieldValue.serverTimestamp()
+			creationTime: firebase.firestore.FieldValue.serverTimestamp(),
+			usersArray: [currUser.id]
 		}
+		currUser.table = newTable.uuid;
+		updateUser(currUser);
+		console.log('table check');
+		console.log(getUser().table);
+		console.log(currUser.table);
 		data.push(newTable);
 		updateData(data);
 

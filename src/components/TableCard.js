@@ -62,7 +62,10 @@ const colorWheel = ['#E5DEF0', '#D6EDD9', '#F6F0D8', '#E6F2FE', '#F0DEDE', '#D6E
 const TableCard = ( { index, data } ) => {
 	const classes = useStyles();
 	const cardColor = colorWheel[index%colorWheel.length];
-	const tableTitle = createTableTitle(data.tableName)
+	const tableTitle = createTableTitle(data.tableName);
+	const usersArray = data.usersArray;
+	const activeUsers = usersArray.length;
+	if (!usersArray) {console.log('bad usersArray'); console.log(data);}
 
 	// 10 max characters
 	return (
@@ -71,7 +74,7 @@ const TableCard = ( { index, data } ) => {
 				<Tooltip title={tableTitle} arrow placement="bottom-end">
 					<Typography variant='h3' className={classes.titleStyle}>{tableTitle}</Typography>
 				</Tooltip>
-				<Typography variant='h4'>Talking: {toTitleCase(data.activeUsers)}/{toTitleCase(data.maxUsers)}</Typography>
+				<Typography variant='h4'>Talking: {toTitleCase(activeUsers)}/{toTitleCase(data.maxUsers)}</Typography>
 				<Typography variant='caption' className={classes.topicStyle}>Topics: {toTitleCase(data.topics)}</Typography>
 				<Button color='white' onClick={()=>{console.log(data.uuid)}} className={classes.button}>Join</Button>
 			</Box>
