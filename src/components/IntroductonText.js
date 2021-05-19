@@ -26,7 +26,7 @@ const useStyles  = makeStyles( {
 	}
 } );
 
-const Introduction = () => {
+const IntroductionText = () => {
 	const classes = useStyles();
 	const titleText = 'Senior Chat';
 	const homeSubtitle = 'A fun place for seniors and others to come together and talk!';
@@ -48,4 +48,4 @@ const Introduction = () => {
 	);
 };
 
-export default Introduction;
+export default IntroductionText;

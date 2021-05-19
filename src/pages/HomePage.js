@@ -1,19 +1,16 @@
 import React from 'react';
 import '../App.css';
 import Box from '@material-ui/core/Box';
-import { Grid } from '@material-ui/core';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-import homeImage from '../assets/images/117297019_l.jpg'
-import Introduction from '../components/Introducton';
+import Introduction from '../components/IntroductonText';
 // import TableCard from '../components/TableCard';
-import StartTable from '../components/StartTable';
 import '../assets/mockData/tableMockData'
-import { tableMockData } from '../assets/mockData/tableMockData';
-import TableCard from '../components/TableCard';
+import { tableMockDataObject } from '../assets/mockData/tableMockData';
 import CreateTableDialog from '../components/CreateTableDialog';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from '../database/database.secrets';
 import { getUser, updateUser } from '../utils/user';
+import VoiceChatList from '../components/VoiceChatList';
 
 const useStyles  = makeStyles( {
 	contentWrapper: {
@@ -32,7 +29,7 @@ const useStyles  = makeStyles( {
 } );
 
 const getMockData = () =>  {
-	return tableMockData;
+	return tableMockDataObject;
 }
 
 const HomePage = () => {
@@ -51,10 +48,13 @@ const HomePage = () => {
 
 		// Realtime Updates
 		tablesRef.orderBy('creationTime').onSnapshot((snapshot) => {
-			let tempData = [];
-			// tempData = tempData.concat(getMockData())
+			// Make object
+			let tempData = {};
 			snapshot.forEach((table) => {
-				tempData.push(table.data())
+				console.log(table.data());
+				const currTable = table.data();
+				tempData[currTable.id] = currTable;
+				// tempData.push(table.data())
 			});
 			// console.log(tempData);
 			updateData(tempData);
@@ -104,47 +104,33 @@ const HomePage = () => {
 	};
 
 	const tableCreation = (tableName, maxUsers, topics)  => {
+		const tableUuid = uuidv4().toString();
 		const newTable = {
 			tableName: tableName,
 			maxUsers: maxUsers,
-			activeUsers: 1,
 			topics: topics,
-			uuid: uuidv4(),
+			id: tableUuid,
 			creationTime: firebase.firestore.FieldValue.serverTimestamp(),
 			usersArray: [currUser.id]
 		}
-		currUser.table = newTable.uuid;
+		currUser.table = newTable.id;
 		updateUser(currUser);
-		console.log('table check');
-		console.log(getUser().table);
-		console.log(currUser.table);
-		data.push(newTable);
+
+		// make this add for object
+		data[newTable.id] = newTable
 		updateData(data);
 
 		//Firebase
 		// firebase.database().ref( 'tables/' + newTable.uuid.toString() ).set( newTable );
 		// const db = firebase.firestore();
-		firestoreDB.collection('tables').doc(newTable.uuid).set( newTable );
+		// newTable.tableName.replace(/\s/g, '') + '-' + newTable.uuid
+		firestoreDB.collection('tables').doc(newTable.tableName.replace(/\s/g, '') + '-' + newTable.id).set( newTable );
 	}
 
 	return (
 		<Box className={classes.contentWrapper}>
-			<Grid container spacing={6}>
-				<Grid item xs={12}  style={{ position: 'relative' }}>
-					<Box className={'headerWrapper'}>
-						<Introduction/>
-						<img className={classes.homePhoto} src={homeImage}/>
-					</Box>
-				</Grid>
-			</Grid>
-			<Box className={'voiceChatWrapper'}>
-				{
-					data.map( ( table, index ) => (
-						<TableCard key={table.uuid} index={index} data={table}/>
-					) )
-				}
-				<StartTable tableCount={data.length} handleClickOpen={handleClickOpen}/>
-			</Box>
+			<Introduction/>
+			<VoiceChatList data={data} handleClickOpen={handleClickOpen}/>
 			<CreateTableDialog open={dialogState} handleClose={handleClose} tableCreation={tableCreation}/>
 		</Box>
 	);

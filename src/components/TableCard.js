@@ -72,11 +72,11 @@ const TableCard = ( { index, data } ) => {
 		<Paper elevation={0}  style={cheekyStyle( cardColor )} className={classes.cardStyle}>
 			<Box className={'tableContentWrapper'}>
 				<Tooltip title={tableTitle} arrow placement="bottom-end">
-					<Typography variant='h3' className={classes.titleStyle}>{tableTitle}</Typography>
+					<Typography variant='h3' className={classes.titleStyle}>{tableTitle || ''}</Typography>
 				</Tooltip>
-				<Typography variant='h4'>Talking: {toTitleCase(activeUsers)}/{toTitleCase(data.maxUsers)}</Typography>
-				<Typography variant='caption' className={classes.topicStyle}>Topics: {toTitleCase(data.topics)}</Typography>
-				<Button color='white' onClick={()=>{console.log(data.uuid)}} className={classes.button}>Join</Button>
+				<Typography variant='h4'>Talking: {toTitleCase(activeUsers)}/{toTitleCase(data.maxUsers || '')}</Typography>
+				<Typography variant='caption' className={classes.topicStyle}>Topics: {toTitleCase(data.topics || '')}</Typography>
+				<Button color='white' onClick={()=>{console.log(data.id)}} className={classes.button}>Join</Button>
 			</Box>
 		</Paper>
 	);
