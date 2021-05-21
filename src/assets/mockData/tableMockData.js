@@ -14,7 +14,7 @@ export const tableMockDataObject = {
 		activeUsers: 4,
 		maxUsers: 5,
 		topics: 'Anxiety, Depresion',
-		uuid: '4d4e953f-132f-4045-85d7-3001c0f7c6e2',
+		id: '4d4e953f-132f-4045-85d7-3001c0f7c6e2',
 		usersArray: ['user-temp']
 	},
 	'5c0747b7-6a2f-4a08-8bf2-0b490b14e7f1': {
@@ -22,7 +22,7 @@ export const tableMockDataObject = {
 		activeUsers: 5,
 		maxUsers: 5,
 		topics: 'Children, Retirement, Life Stories',
-		uuid: uuidv4(),
+		id: uuidv4(),
 		usersArray: ['user-temp']
 	},
 	'52897aef-c7ed-4d6d-ab46-1d4485334627': {
@@ -30,7 +30,7 @@ export const tableMockDataObject = {
 		activeUsers: 4,
 		maxUsers: 8,
 		topics: 'Senior companionship, company building',
-		uuid: uuidv4(),
+		id: uuidv4(),
 		usersArray: ['user-temp']
 	},
 	'dca55c69-daf7-4569-ae9d-55f82acf22c8': {
@@ -38,7 +38,7 @@ export const tableMockDataObject = {
 		activeUsers: 1,
 		maxUsers: 2,
 		topics: 'Meaning of Life',
-		uuid: uuidv4(),
+		id: uuidv4(),
 		usersArray: ['user-temp']
 	}
 };

@@ -9,9 +9,11 @@ const VoiceChatList = ({ data, handleClickOpen }) => {
 	return(
 		<Box className={'voiceChatWrapper'}>
 			{
-				Object.values(data).map(( table, index ) => (
-					<TableCard key={table.id} index={index} data={table}/>
-				))
+				Object.values(data).map(( table, index ) => {
+					return (
+						<TableCard key={table.id} index={index} data={table}/> 
+					);
+				})
 			}
 			<StartTable tableCount={Object.keys(data).length} handleClickOpen={handleClickOpen}/>
 		</Box>
