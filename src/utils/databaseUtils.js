@@ -1,5 +1,6 @@
 import firebase from '../database/database.secrets';
 import { updateUser } from './userUtils';
+import { tableMockDataObject } from '../assets/mockData/tableMockData';
 
 
 export const getTableID = (table) => {
@@ -10,30 +11,19 @@ export const getTableID = (table) => {
 export const getTableData = async (tableID) => {
 	const firestoreDB = firebase.firestore();
 	const tablesRef = firestoreDB.collection('tables').doc(tableID);
-	const snapshot = await tablesRef.get().catch((error) => {
-		console.log('Error getting document:', error);
-		return null
-	});
-
-	const table = snapshot.data();
-
-	// await tablesRef.get().then((snapshot) => {
-	// 	if (snapshot.exists) {
-	// 		const table = snapshot.data();
-	// 		console.log('Document data:', table);
-	// 		return table;
-	// 	} else {
-	// 		// doc.data() will be undefined in this case
-	// 		const table = null;
-	// 		console.log('No such document!');
-	// 		return table;
-	// 	}
-	// }).catch((error) => {
-	// 	console.log('Error getting document:', error);
-	// 	return null
-	// });
-	
-	return table;
+	try {
+		const snapshot = await tablesRef.get();
+		if (snapshot.exists) {
+			const table = snapshot.data();
+			return table;
+		} else {
+			console.log('No such document');
+			return null;
+		}
+	} catch (error) {
+		console.error('Error getting document:', error);
+		return null;
+	}
 }
 
 export const updateTable = (tablesRef, field, data) => {
@@ -60,16 +50,18 @@ export const deleteTable = (tablesRef) => {
 export const syncTables = (updateData) => {
 	const firestoreDB = firebase.firestore();
 	const tablesRef = firestoreDB.collection('tables');
-
 	tablesRef.orderBy('creationTime').onSnapshot((snapshot) => {
 		let tempData = {};
 		snapshot.forEach((table) => {
 			const currTable = table.data();
 			tempData[currTable.id || currTable.UUID] = currTable;
 		});
-		console.log('Synced Tables: ', tempData);
+		// console.log('Synced Tables: ', tempData);
 		updateData(tempData);
-	});
+	}, (error => {
+		console.log('Sync Error ', error);
+		updateData(tableMockDataObject);
+	}));
 };
 
 export const startTable = (newTable) => {
@@ -83,6 +75,9 @@ export const leaveTable = async (tableID, user) => {
 	const tablesRef = firestoreDB.collection('tables').doc(tableID);
 	const tableData = await getTableData(tableID);
 
+	console.log('Leave Table table data: ', tableData);
+	if (!tableData) { return false; }
+	
 	let userArray = tableData.usersArray
 	userArray = userArray.filter(item => item !== user.id);
 	user.tableID = null;
@@ -110,8 +105,9 @@ export const joinTableDB = async (tableID, user) => {
 	const table = await getTableData(tableID);
 
 	console.log('table Data: ', table);
-	let userArray = table.usersArray;
+	if (!table) {return false;}
 
+	let userArray = table.usersArray;
 	// Check if user already in array
 	if (userArray.includes(user.id)) { return false; }
 

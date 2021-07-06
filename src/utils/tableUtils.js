@@ -25,7 +25,7 @@ export const createTable = (tableName, maxUsers, topics)  => {
 	// If user is part of a table, leave that table
 	if (currUser.tableID != null) {
 		console.log('User Part of other table ' + currUser.tableID);
-		leaveTable( currUser.tableID, currUser ).then( r  => console.log('Leave Table Finished ', r));
+		leaveTable( currUser.tableID, currUser ).then( r  => console.log('leaveTable() Finished ', r));
 	}
 
 	joinTable( newTable.tableID ).then( r => console.log(r) );
@@ -39,11 +39,16 @@ export const joinTable = async (currTableID) => {
 
 	// If user is currently in a table, leave it
 	if (currUser.tableID) {
+		if (currUser.tableID === currTableID) {
+			userFeedBack = 'Already in table';
+			console.log(userFeedBack);
+			return userFeedBack;
+		}
 		const oldTable = JSON.parse(currUser.tableData);
 		console.log(currUser.tableID);
 
 		await leaveTable( currUser.tableID, currUser )
-		userFeedBack = userFeedBack + `Left ${oldTable.tableName}.`;
+		userFeedBack = userFeedBack + `Left ${oldTable.tableName}. `;
 	}
 
 	const joinTableSuccess = await joinTableDB( currTableID, currUser );
