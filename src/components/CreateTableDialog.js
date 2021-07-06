@@ -9,6 +9,7 @@ import { Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Blip } from './Blip';
+import { createTable } from '../utils/tableUtils';
 
 
 const useStyles = makeStyles( {
@@ -80,7 +81,7 @@ const dialogStyle = {
 	// height: '541px'
 }
 
-export const CreateTableDialog  = ({ open = false, handleClose, tableCreation }) => {
+export const CreateTableDialog  = ({ open = false, handleClose }) => {
 	const classes = useStyles();
 	const [tableName, updateTableName] = React.useState('');
 	const [topics, updateTopics] = React.useState('');
@@ -112,7 +113,9 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 			})
 		}
 		else {
-			tableCreation( tableName, maxPeople, topics );
+			createTable( tableName, maxPeople, topics)
+			console.log('creation finished');
+			// tableCreation( tableName, maxPeople, topics );
 			dialogClose();
 		}
 	}

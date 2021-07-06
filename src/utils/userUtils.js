@@ -6,7 +6,9 @@ export const getUser = () => {
 		currUser = {
 			id: 'user-' + uuidv4().toString(),
 			table: null,
-			icon: 'lion'
+			icon: 'lion',
+			tableID: null,
+			tableData: null
 		};
 		localStorage.setItem('userSession', JSON.stringify(currUser));
 	} else {

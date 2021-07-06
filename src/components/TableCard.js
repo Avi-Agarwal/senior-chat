@@ -2,11 +2,12 @@ import Button from '@material-ui/core/Button';
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import makeStyles from '@material-ui/core/styles/makeStyles';
-// import theme from '../Theme';
 import { Typography } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import Tooltip from '@material-ui/core/Tooltip';
 import { toTitleCase,  createTableTitle } from '../utils/generalUtils';
+import { joinTable } from '../utils/tableUtils';
+import { getTableID } from '../utils/databaseUtils';
 
 const useStyles = makeStyles( {
 	cardStyle : {
@@ -15,13 +16,9 @@ const useStyles = makeStyles( {
 		paddingTop: '27px',
 		paddingBottom: '26px',
 		marginBottom: '4.5vh',
-		// marginBottom: '2.5vh',
 		borderRadius: '40px',
 		width: '320px',
 		height: '250px'
-		// height: 'fit-content',
-		// minHeight: '250px'
-		// minHeight: '226px'
 	},
 	button : {
 		backgroundColor: 'white',
@@ -32,7 +29,6 @@ const useStyles = makeStyles( {
 		'&:hover': {
 			backgroundColor: '#FFFFFF'
 		}
-		// marginBottom: '24px'
 	},
 	titleStyle : {
 		width: '105%',
@@ -67,7 +63,6 @@ const TableCard = ( { index, data } ) => {
 	const activeUsers = usersArray.length;
 	if (!usersArray) {console.log('bad usersArray'); console.log(data);}
 
-	// 10 max characters
 	return (
 		<Paper elevation={0}  style={cheekyStyle( cardColor )} className={classes.cardStyle}>
 			<Box className={'tableContentWrapper'}>
@@ -76,7 +71,7 @@ const TableCard = ( { index, data } ) => {
 				</Tooltip>
 				<Typography variant='h4'>Talking: {toTitleCase(activeUsers)}/{toTitleCase(data.maxUsers || '')}</Typography>
 				<Typography variant='caption' className={classes.topicStyle}>Topics: {toTitleCase(data.topics || '')}</Typography>
-				<Button color='white' onClick={()=>{console.log(data.id)}} className={classes.button}>Join</Button>
+				<Button color='white' onClick={() => joinTable(data.tableID || getTableID(data))} className={classes.button}>Join</Button>
 			</Box>
 		</Paper>
 	);
