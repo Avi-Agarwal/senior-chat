@@ -53,7 +53,7 @@ export const joinTable = async (currTableID) => {
 
 	const joinTableSuccess = await joinTableDB( currTableID, currUser );
 	console.log(joinTableSuccess);
-	console.log('Join Table DB Finished');
+	console.log('joinTableDB() Finished');
 	if (joinTableSuccess) {
 		const newTable = JSON.parse(currUser.tableData);
 		userFeedBack = userFeedBack + `Joined ${newTable.tableName}`;
