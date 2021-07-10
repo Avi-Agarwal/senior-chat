@@ -1,6 +1,8 @@
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
 
 function Alert(props) {
 	return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -19,7 +21,7 @@ export const Blip = ({ message, type, externalClose = () => {}, ...props  }) => 
 
 	return (
 		<>
-			<Snackbar open={open} autoHideDuration={6000} onClose={handleClose} {...props}>
+			<Snackbar open={open} autoHideDuration={4000} onClose={handleClose} {...props}>
 				<Alert onClose={handleClose} severity={type}>
 					{message}
 				</Alert>
