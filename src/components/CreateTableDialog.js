@@ -9,6 +9,7 @@ import { Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 import { Blip } from './Blip';
+import { createTable } from '../utils/tableUtils';
 
 
 const useStyles = makeStyles( {
@@ -80,7 +81,7 @@ const dialogStyle = {
 	// height: '541px'
 }
 
-export const CreateTableDialog  = ({ open = false, handleClose, tableCreation }) => {
+export const CreateTableDialog  = ({ open = false, handleClose }) => {
 	const classes = useStyles();
 	const [tableName, updateTableName] = React.useState('');
 	const [topics, updateTopics] = React.useState('');
@@ -106,16 +107,15 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 	}
 
 	const handleCreate = () => {
-		console.log(tableName.length);
-		console.log(topics.length);
 		if (tableName.length < 1 || topics.length < 1) {
 			updateBlipInfo({
 				blipNeeded: true, message: 'Please make sure all fields are filled out', type: 'error'
 			})
-			// return (<Blips type={'warning'} message={'Please make sure all fields are filled out'}/>);
 		}
 		else {
-			tableCreation( tableName, maxPeople, topics );
+			createTable( tableName, maxPeople, topics)
+			console.log('creation finished');
+			// tableCreation( tableName, maxPeople, topics );
 			dialogClose();
 		}
 	}
@@ -135,12 +135,12 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 						<TextField
 							id="tableName"
 							type="text"
-							placeholder={'Table Name (13 character max)'}
+							placeholder={'Table Name (15 character max)'}
 							InputProps={{ className: classes.input }}
 							className={classes.textField}
 							margin='normal'
 							onChange={({ target }) => {
-								target.value.length < 14 ?  updateTableName(target.value): null ;
+								target.value.length < 16 ?  updateTableName(target.value): null ;
 							}}
 							value={tableName}
 							color="secondary"
@@ -158,7 +158,7 @@ export const CreateTableDialog  = ({ open = false, handleClose, tableCreation })
 							margin='normal'
 							className={classes.textField}
 							onChange={({ target }) => {
-								updateTopics(target.value);
+								target.value.length < 50 ? updateTopics(target.value) : null ;
 							}}
 							value={topics}
 							color="secondary"
